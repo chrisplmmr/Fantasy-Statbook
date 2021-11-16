@@ -1,0 +1,25 @@
+{
+  "name": "fantasystatbook",
+  "version": "1.0.0",
+  "description": "Data Visualization Project. This project visualized fantasy football data to compare player statistics of seasons and by a number of different categories.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisplmmr/Fantasy-Statbook.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrisplmmr/Fantasy-Statbook/issues"
+  },
+  "homepage": "https://github.com/chrisplmmr/Fantasy-Statbook#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.7.1",
+    "save": "^2.4.0",
+    "tar": "^6.1.11"
+  }
+}
