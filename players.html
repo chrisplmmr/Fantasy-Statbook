@@ -28,24 +28,58 @@
         <!-- Header-->
         <header class="bg-primary bg-gradient text-white">
             <div class="container px-4 text-center">
-                <h1 class="fw-bolder">Fantasy Statbook</h1>
-                <p class="lead">Visualization of Fantasy Football Stats</p>
-                <a class="btn btn-lg btn-light" href="#about">Browse Players!</a>
+                <h1 class="fw-bolder">Browse Players</h1>
+                <p class="lead">Explore all player fantasy performance.</p>
             </div>
         </header>
-        <!-- About section-->
+        <!-- Tables from https://mdbootstrap.com/docs/b4/jquery/tables/pagination/ -->
         <section id="about">
             <div class="container px-4">
                 <div class="row gx-4 justify-content-center">
                     <div class="col-lg-8">
                         <h2>About this page</h2>
-                        <p class="lead">This is a great place to talk about your webpage. This template is purposefully unstyled so you can use it as a boilerplate or starting point for you own landing page designs! This template features:</p>
-                        <ul>
-                            <li>Clickable nav links that smooth scroll to page sections</li>
-                            <li>Responsive behavior when clicking nav links perfect for a one page website</li>
-                            <li>Bootstrap's scrollspy feature which highlights which section of the page you're on in the navbar</li>
-                            <li>Minimal custom CSS so you are free to explore your own unique design options</li>
-                        </ul>
+                        <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th class="th-sm">Name
+
+                                    </th>
+                                    <th class="th-sm">Position
+
+                                    </th>
+                                    <th class="th-sm">Office
+
+                                    </th>
+                                    <th class="th-sm">Age
+
+                                    </th>
+                                    <th class="th-sm">Start date
+
+                                    </th>
+                                    <th class="th-sm">Salary
+
+                                    </th>
+                                </tr>
+                            </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Tiger Nixon</td>
+                                        <td>System Architect</td>
+                                        <td>Edinburgh</td>
+                                        <td>61</td>
+                                        <td>2011/04/25</td>
+                                        <td>$320,800</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Garrett Winters</td>
+                                        <td>Accountant</td>
+                                        <td>Tokyo</td>
+                                        <td>63</td>
+                                        <td>2011/07/25</td>
+                                        <td>$170,750</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
