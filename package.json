@@ -21,6 +21,7 @@
 	},
 	"homepage": "https://github.com/chrisplmmr/Fantasy-Statbook#readme",
 	"dependencies": {
+		"anychart": "^8.10.0",
 		"aws-sdk": "^2.684.0",
 		"bcrypt": "^5.0.1",
 		"body-parser": "^1.19.0",
