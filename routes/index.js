@@ -12,23 +12,16 @@ const anychart = require('anychart');
 
 router.get('/', async (req, res) => {
 	var cmd = 'SELECT * FROM test_table;';
-	// try{
-    //     const playerData = await sql.query("SELECT * FROM test_table;");
-    //     // console.log(playerData.rows);
-	// 	res.render('index', {data: playerData.rows});
-    // } catch(err) {
-    //     console.error(err.message);
-    // }
 
 	// callback
-	pool.query(cmd, (err, qres) => {
-		if (err) {
-			console.log(err.stack);
-		} else {
-			// console.log(qres.rows);
-			res.render('index', {playerData: qres.rows});
-		}
-	});
+	// pool.query(cmd, (err, qres) => {
+	// 	if (err) {
+	// 		console.log(err.stack);
+	// 	} else {
+	// 		// console.log(qres.rows);
+	// 		res.render('index', {playerData: qres.rows});
+	// 	}
+	// });
 });
 
 router.get('/template', function (req, res) {
