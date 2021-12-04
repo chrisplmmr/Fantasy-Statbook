@@ -28,8 +28,19 @@ router.get('/template', function (req, res) {
 	res.render('template');
 });
 
+router.get('/home', function (req, res) {
+	res.render('index');
+});
+
+
 router.get('/players', function (req, res) {
-	res.render('players');
+	
+	res.render('players',
+	{
+		path : 'partials/2019_Players'
+	});
+	
+	
 });
 
 router.get('/seasonal', function (req, res) {
