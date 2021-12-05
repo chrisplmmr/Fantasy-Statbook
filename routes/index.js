@@ -14,14 +14,14 @@ router.get('/', async (req, res) => {
 	var cmd = 'SELECT * FROM test_table;';
 
 	// callback
-	// pool.query(cmd, (err, qres) => {
-	// 	if (err) {
-	// 		console.log(err.stack);
-	// 	} else {
-	// 		// console.log(qres.rows);
-	// 		res.render('index', {playerData: qres.rows});
-	// 	}
-	// });
+	pool.query(cmd, (err, qres) => {
+		if (err) {
+			console.log(err.stack);
+		} else {
+			// console.log(qres.rows);
+			res.render('index', {playerData: qres.rows});
+		}
+	});
 });
 
 router.get('/template', function (req, res) {
