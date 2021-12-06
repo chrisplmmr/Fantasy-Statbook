@@ -56,19 +56,7 @@ router.get('/alltime', function (req, res) {
 	res.render('alltime');
 });
 
-
-// app.get('/', (_, res) => {
-//     res.sendFile('index.html')
-// })
-
 router.get('/2019data', (_, res) => {
-	// fetch('sus.txt')
-	// .then(response => response.text())
-	// .then(data => {
-	// 	console.log(data);
-	// 	res.send(data);
-	// });
-	//res.sendFile(__dirname + '/../data/yearly/2019.csv');
 	res.sendFile(__dirname + '\\2019.txt');
 });
 

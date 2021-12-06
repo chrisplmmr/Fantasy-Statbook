@@ -68,14 +68,14 @@
                             {
                               if (this.value != '')
                               {
-                                $('#' + this.value).hide(); // .css("display", "none");
+                                $('#' + this.value).css("display", "none");
                               }
                             });
-                            $('#' + this.value).show(); //.css("display", "block");
+                            $('#' + this.value).css("display", "block");
                           });
                         </script>
 
-                        <!--
+                        
                         <script>
                           $(document).ready(function(){
                             $("select").change(function(){
@@ -289,7 +289,8 @@
           </div>
         </section>
         
-
+        <!-- Footer -->
+        <%- include('partials/footer') %>
 
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -297,6 +298,4 @@
         <!-- Core theme JS-->
         <script src="/scripts/scripts.js"></script>
     </body>
-    <!-- Footer -->
-    <%- include('partials/footer') %>
 </html>
