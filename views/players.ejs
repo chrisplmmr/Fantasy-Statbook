@@ -5,8 +5,6 @@
 	<%- include('partials/header') %>
 
     <head>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
             $('.drop-down-show-hide').hide();
 
@@ -19,14 +17,13 @@
               }
             });
             $('#' + this.value).show();
-
           });
         </script>
-
     </head>
 
     <body id="page-top">
-        <!-- Navigation-->
+    
+     <!-- Navigation-->
 		<%- include('partials/nav') %>
 
         <!-- Header-->
@@ -53,7 +50,7 @@
                         </div>
                         <label for="years">Choose Year: </label>
                         <select class="form-select" data-style="btn-success" id="dropDown" >
-                            <option value="NONE">Choose...</option>
+                            <option value="NONE" selected>Choose...</option>
                             <option value="div1">2019</option>
                             <option value="div2">2018</option>
                             <option value="div3">2017</option>
@@ -62,7 +59,6 @@
 
                         <!-- ADD TABLEAU GRAPHS HERE, MATCHING FORMAT -->
                         <script>
-
                           $('.drop-down-show-hide').hide();
                           var val0 = $('#dropDown').find("option").value
                             console.log('we made it')
@@ -72,24 +68,24 @@
                             {
                               if (this.value != '')
                               {
-                                $('#' + this.value).css("display", "none");
+                                $('#' + this.value).hide(); // .css("display", "none");
                               }
                             });
-                            $('#' + this.value).css("display", "block");
-
+                            $('#' + this.value).show(); //.css("display", "block");
                           });
                         </script>
 
+                        <!--
                         <script>
                           $(document).ready(function(){
                             $("select").change(function(){
                               $(this).find("option:selected").each(function(){
                                 var optionValue = $(this).attr("value");
                                 if(optionValue){
-                                  $(".box").not("." + optionValue).hide();
+                                  $(".").not("." + optionValue).hide();
                                   $("." + optionValue).show();
                                 } else{
-                                  $(".box").hide();
+                                  $(".").hide();
                                 }
                               });
                             }).change();
@@ -218,7 +214,6 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </section>
@@ -232,43 +227,31 @@
                         <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th class="th-sm">Name
-
-                                    </th>
-                                    <th class="th-sm">Position
-
-                                    </th>
-                                    <th class="th-sm">Office
-
-                                    </th>
-                                    <th class="th-sm">Age
-
-                                    </th>
-                                    <th class="th-sm">Start date
-
-                                    </th>
-                                    <th class="th-sm">Salary
-
-                                    </th>
+                                  <th class="th-sm">Name</th>
+                                  <th class="th-sm">Position</th>
+                                  <th class="th-sm">Office</th>
+                                  <th class="th-sm">Age</th>
+                                  <th class="th-sm">Start date</th>
+                                  <th class="th-sm">Salary</th>
                                 </tr>
                             </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>$320,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>63</td>
-                                        <td>2011/07/25</td>
-                                        <td>$170,750</td>
-                                    </tr>
+                            <tbody>
+                                <tr>
+                                  <td>Tiger Nixon</td>
+                                  <td>System Architect</td>
+                                  <td>Edinburgh</td>
+                                  <td>61</td>
+                                  <td>2011/04/25</td>
+                                  <td>$320,800</td>
+                                </tr>
+                                <tr>
+                                  <td>Garrett Winters</td>
+                                  <td>Accountant</td>
+                                  <td>Tokyo</td>
+                                  <td>63</td>
+                                  <td>2011/07/25</td>
+                                  <td>$170,750</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -276,39 +259,37 @@
             </div>
         </section>-->
 
+        <!--
+        <section id="old_yearly_stats">
+          <div class="container px-4">
+              <div class="row gx-4 justify-content-center">
+                  <div class="col-lg-10">
+                      <h2>Yearly Player Stats</h2>
+                      <hr/>
+                      <%- include('partials/2019_Players') %>
+                      <hr/>
+                      <%- include('partials/2018_Players') %>
+                      <hr/>
+                      <%- include('partials/2017_Players') %>
+                  </div>
+              </div>
+          </div>
+      </section> 
+      -->
+
         <!-- Services section-->
         <section class="bg-light" id="services">
-            <div class="container px-4">
-                <div class="row gx-4 justify-content-center">
-                    <div class="col-lg-8">
-                        <h2>About this project:</h2>
-                        <p class="lead">This project was made for Dr. Shipman's class at Texas A&M University about Data Visualization.</p>
-                    </div>
-                </div>
-            </div>
+          <div class="container px-4">
+              <div class="row gx-4 justify-content-center">
+                  <div class="col-lg-8">
+                      <h2>About this project:</h2>
+                      <p class="lead">This project was made for Dr. Shipman's class at Texas A&M University about Data Visualization.</p>
+                  </div>
+              </div>
+          </div>
         </section>
         
 
-
-        <!-- Tableu Script -->
-
-        <!-- 2019 -->
-
-        <!-- AJAX for Chart Select-->
-        <script>
-            // const xhr = new XMLHttpRequest();
-            // const container = window.document.getElementById("chart_container");
-            // xhr.onload = function(){
-            //     if(this.status === 200){
-            //         container.innerHTML = this.responseText;
-            //         console.log(this.responseText);
-            //     } else {
-            //         console.warn('Tableau Chart Load Error...');
-            //     }
-            // };
-            // xhr.open('GET', '/partials/2019_Players', true);
-            // xhr.send();
-        </script>
 
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
