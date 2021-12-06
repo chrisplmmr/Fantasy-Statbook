@@ -41,11 +41,11 @@
                         <h2>Yearly Player Stats</h2>
                         <p><i>Four dimentional scatterplots for player stat insight!</i></p>
 
-                        <div class = "container">
-                            <h4><span class = "badge badge-info">Years Available</span></h4>
-                            <span class = "badge badge-primary">2019</span>
-                            <span class = "badge badge-secondary">2018</span>
-                            <span class = "badge badge-success">2017</span>
+                        <div>
+                            <h4><span class = "badge bg-info">Years Available</span></h4>
+                            <span class = "badge bg-primary">2019</span>
+                            <span class = "badge bg-secondary">2018</span>
+                            <span class = "badge bg-success">2017</span>
                             <p></p>
                         </div>
                         <label for="years">Choose Year: </label>
@@ -68,14 +68,14 @@
                             {
                               if (this.value != '')
                               {
-                                $('#' + this.value).hide(); // .css("display", "none");
+                                $('#' + this.value).css("display", "none");
                               }
                             });
-                            $('#' + this.value).show(); //.css("display", "block");
+                            $('#' + this.value).css("display", "block");
                           });
                         </script>
 
-                        <!--
+
                         <script>
                           $(document).ready(function(){
                             $("select").change(function(){
