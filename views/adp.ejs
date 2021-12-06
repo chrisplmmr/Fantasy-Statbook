@@ -5,19 +5,18 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
-            $('.drop-down-show-hide').hide();
+            $('#dropDown').load(function(){
 
-            $('#dropDown').change(function(){
-            $(this).find("option").each(function()
-            {
-              if (this.value != '')
-              {
-                $('#' + this.value).hide();
-              }
+                $(this).find("option").each(function()
+                {
+                    if (this.value != 'NONE')
+                    {
+                        $('#' + this.value).css("display", "none");
+                    }
+                });
+                $('#' + this.value).css("display", "block");
+
             });
-            $('#' + this.value).show();
-
-          });
         </script>
     </head>
     <body id="page-top">
@@ -39,6 +38,15 @@
                     <div class="col-xxl-12">
                         <h2>Average Draft Position vs. Actual Performance</h2>
                         <p class="lead">2021 Positional Performance Differential</p>
+
+                        <div class = "container">
+                            <h4><span class = "badge badge-info">Years Available</span></h4>
+                            <span class = "badge badge-primary">Running Back - RB</span>
+                            <span class = "badge badge-secondary">Wide Receiver - WR</span>
+                            <span class = "badge badge-success">Tight End - TE</span>
+                            <span class = "badge badge-warning">Quarterback - QB</span>
+                        </div>
+                        <hr>
                         <select class="form-select" data-style="btn-success" id="dropDown" >
                             <option value="NONE">Choose...</option>
                             <option value="div1">RB</option>
@@ -46,15 +54,15 @@
                             <option value="div3">TE</option>
                             <option value="div4">QB</option>
                         </select>
-                        <hr/>
+
 
                         <script>
 
                             $('.drop-down-show-hide').css("display", "none");
-                            var val0 = $('#dropDown').find("option").value
-                            console.log(val0)
+                            $('#graphWrap').css("display", "none");
 
                             $('#dropDown').change(function(){
+                                $('#graphWrap').css("display", "inherit");
                                 $(this).find("option").each(function()
                                 {
                                     if (this.value != '')
@@ -66,8 +74,10 @@
 
                             });
                         </script>
+
                         <script>
                             $(document).ready(function(){
+
                                 $("select").change(function(){
                                     $(this).find("option:selected").each(function(){
                                         var optionValue = $(this).attr("value");
@@ -81,19 +91,20 @@
                                 }).change();
                             });
                         </script>
-                        <div  id="div1" class="drop-down-show-hide">
-                            <%- include('partials/2021_RB_ADP') %>
+                        <div id="graphWrap" >
+                            <div  id="div1" class="drop-down-show-hide">
+                                <%- include('partials/2021_RB_ADP') %>
+                            </div>
+                            <div  id="div2" class="drop-down-show-hide">
+                                <%- include('partials/2021_WR_ADP') %>
+                            </div>
+                            <div  id="div3" class="drop-down-show-hide">
+                                <%- include('partials/2021_TE_ADP') %>
+                            </div>
+                            <div  id="div4" class="drop-down-show-hide">
+                                <%- include('partials/2021_QB_ADP') %>
+                            </div>
                         </div>
-                        <div  id="div2" class="drop-down-show-hide">
-                            <%- include('partials/2021_WR_ADP') %>
-                        </div>
-                        <div  id="div3" class="drop-down-show-hide">
-                            <%- include('partials/2021_TE_ADP') %>
-                        </div>
-                        <div  id="div4" class="drop-down-show-hide">
-                            <%- include('partials/2021_QB_ADP') %>
-                        </div>
-                            
                     </div>
                 </div>
             </div>

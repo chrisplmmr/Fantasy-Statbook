@@ -32,18 +32,25 @@
         <!-- Header-->
         <header class="bg-primary-nfl bg-gradient text-white">
             <div class="container px-4 text-center">
-                <h1 class="fw-bolder">Browse Players</h1>
-                <p class="lead">Explore player fantasy performance.</p>
+                <h1 class="fw-bolder">Seasonal Player Graphs</h1>
+                <p class="lead">Visually compare position group performances.</p>
             </div>
         </header>
 
         <section id="yearly_stats">
             <div class="container px-4">
                 <div class="gx-4 justify-content-center">
-                    <div class="col-xxl-12">
+                    <div class="col-xxl">
                         <h2>Yearly Player Stats</h2>
                         <p><i>Four dimentional scatterplots for player stat insight!</i></p>
 
+                        <div class = "container">
+                            <h4><span class = "badge badge-info">Years Available</span></h4>
+                            <span class = "badge badge-primary">2019</span>
+                            <span class = "badge badge-secondary">2018</span>
+                            <span class = "badge badge-success">2017</span>
+                            <p></p>
+                        </div>
                         <label for="years">Choose Year: </label>
                         <select class="form-select" data-style="btn-success" id="dropDown" >
                             <option value="NONE">Choose...</option>
@@ -106,11 +113,13 @@
                                         <param name='display_count' value='yes' />
                                         <param name='language' value='en-US' />
                                         <param name='filter' value='publish=yes' />
+                                        <param name='device' value='desktop'/>
                                     </object>
                                 </div>
                                 <script type='text/javascript'>
                                   var divElement = document.getElementById('viz1638491358761');
                                   var vizElement = divElement.getElementsByTagName('object')[0];
+                                  console.log(divElement.offsetWidth)
                                   if ( divElement.offsetWidth > 800 ) {
                                     vizElement.style.width='100%';
                                     vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
@@ -143,6 +152,7 @@
                                         <param name='display_count' value='yes' />
                                         <param name='language' value='en-US' />
                                         <param name='filter' value='publish=yes' />
+                                        <param name='device' value='desktop'/>
                                     </object>
                                 </div>
                                 <script type='text/javascript'>
@@ -185,6 +195,7 @@
                                         <param name='display_count' value='yes' />
                                         <param name='language' value='en-US' />
                                         <param name='filter' value='publish=yes' />
+                                        <param name='device' value='desktop'/>
                                     </object>
                                 </div>
                                 <script type='text/javascript'>
@@ -213,7 +224,7 @@
         </section>
 
         <!-- Tables from https://mdbootstrap.com/docs/b4/jquery/tables/pagination/ -->
-        <section id="about">
+        <!--<section id="about">
             <div class="container px-4">
                 <div class="row gx-4 justify-content-center">
                     <div class="col-lg-8">
@@ -263,7 +274,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
 
         <!-- Services section-->
         <section class="bg-light" id="services">
@@ -277,8 +288,7 @@
             </div>
         </section>
         
-        <!-- Footer -->
-        <%- include('partials/footer') %>
+
 
         <!-- Tableu Script -->
 
@@ -306,4 +316,6 @@
         <!-- Core theme JS-->
         <script src="/scripts/scripts.js"></script>
     </body>
+    <!-- Footer -->
+    <%- include('partials/footer') %>
 </html>
