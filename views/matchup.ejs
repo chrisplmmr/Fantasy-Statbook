@@ -5,38 +5,16 @@
 	
     <body id="page-top">
 
-        <script>
-            
-            getData();
-
-            async function getData(){
-                const newRes = await fetch('/2019data');
-                const csvTxt = await newRes.text();
-                console.log(csvTxt);
-            }
-        </script>
-
         <!-- Navigation -->
 		<%- include('partials/nav') %>
 
         <!-- Header -->
         <header class="bg-primary-nfl bg-gradient text-white">
             <div class="container px-4 text-center">
-                <h1 class="fw-bolder"> Fantasy Statbook </h1>
-                <p class="lead">Visualization of Fantasy Football Stats</p>
+                <h1 class="fw-bolder">Player Stat Matchup</h1>
+                <p class="lead">Compare players statistics from multiple years</p>
             </div>
         </header>
-
-        <!-- Matchup Testing -->
-        <section class="bg-light" id="services">
-            <div class="container px-4">
-                <div class="row gx-4 justify-content-center">
-                    <div class="col-lg-8">
-                        <h2>Player Matchup</h2>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- Test Section -->
         <section id="about">
@@ -44,99 +22,145 @@
                 <div class="row gx-4 justify-content-center">
                     <div class="col-lg-8">
                         <h2>Player Matchup</h2>
-                        <div id="container" style="width: 800px; height: 400px;"></div>
-                        <script>
-                            var playerData = JSON.parse('<%- JSON.stringify(playerData) %>');
-                            if(playerData){
-                                //console.log(playerData[0]);
-                                anychart.onDocumentReady(function() {
-                                    var p1;
-                                    for (var i=0; i < playerData.length ; i++)
-                                    {
-                                        if (playerData[i].player == 'Player 2') {
-                                            p1 = playerData[i];
-                                            break;
-                                        }
-                                    }
-                                    var p2 = playerData[2];
-                                    // create data
-                                    var data = anychart.data.set([
-                                        ["Games", p1.yr16, p2.yr16],
-                                        ["Comp", p1.yr17, p2.yr17],
-                                        ["Int", p1.yr18, p2.yr18],
-                                        ["Yds", p1.yr19, p2.yr19],
-                                        ["Tgt", p1.yr20, p2.yr20],
-                                        ["Rec", p1.yr21, p2.yr21],
-                                        ["Y/R", p1.yr21, p2.yr21],
-                                        ["Fumbles", p1.yr21, p2.yr21]
-                                    ]);
-
-                                    // map the data
-                                    var playerData1 = data.mapAs({x: 0, value: 1, fill: 3, stroke: 5, label: 6});
-                                    var playerData2 = data.mapAs({x: 0, value: 2, fill: 4, stroke: 5, label: 6});
-
-                                    // create a chart
-                                    chart = anychart.column();
-
-                                    // create series and set the data
-                                    var series1 = chart.column(playerData1);
-                                    var series2 = chart.column(playerData2);
-
-                                    chart.barGroupsPadding(1);
-
-                                    // Set width bound
-                                    chart.width('100%');
-
-                                    // Rename the series to player names
-                                    chart.getSeriesAt(0).name(p1.player);
-                                    chart.getSeriesAt(1).name(p2.player);
-
-                                    chart.tooltip().format("{%seriesName}: {%value}")
-
-                                    // set the container id
-                                    chart.container("container");
-
-                                    // initiate drawing the chart
-                                    chart.draw();
-                                });
-                            }
-                        </script>
-                        <!-- Row for buttons and stuff -->
-                        <!--
-                        <div class="row">
-                            <div class="col">
-                                <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                      Year
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                      <li><a class="dropdown-item">Action</a></li>
-                                      <li><a class="dropdown-item">Another action</a></li>
-                                      <li><a class="dropdown-item">Something else here</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <label>Year: <input list="browsers" name="myBrowser" /></label>
-                        <datalist id="browsers">
-                            <option value="Chrome">
-                            <option value="Firefox">
-                            <option value="Internet Explorer">
-                            <option value="Opera">
-                            <option value="Safari">
-                            <option value="Microsoft Edge">
-                        </datalist> 
-                        -->
+                        <p><i>Choose two players and compare their stats</i></p>
+                        <div id="chartContainer"></div>
                     </div>
                 </div>
-                <form>
-                    <label for="years">Choose Year: </label>
-                    <select id="years" name="years">
-                        <option>2018</option>
-                        <option>2019</option>
-                    </select>
-                    <input type="submit">
-                </form>
+
+                <!-- Year / Player Selection -->
+                <div class="container">
+                    <div class="row border rounded my-3 py-3">
+                        <div class="col px-md-5"> 
+                            <div class="row">        
+                                <label for="years">Choose Year: </label>
+                                <select id="yearsListOne" name="yearsListOne" onchange="checkDropDownYear(this)">
+                                    <option value="NONE" selected>Select Year</option>
+                                    <option value="/2019data">2019</option>
+                                    <option value="/2018data">2018</option>
+                                </select>
+                            </div>
+                            <div class="row"> 
+                                <label for="years">Choose Player:</label>
+                                <select id="playerListOne" name="playerListOne" onchange="">
+                                    <option value="NONE" selected>Select Player</option>
+                                </select> 
+                            </div>
+                        </div>
+                        <div class="col px-md-5">
+                            <div class="row">
+                                <label for="years">Choose Year: </label>
+                                <select id="yearsListTwo" name="yearsListTwo" onchange="checkDropDownYear(this)">
+                                    <option value="NONE" selected>Select Year</option>
+                                    <option value="/2019data">2019</option>
+                                    <option value="/2018data">2018</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <label for="years">Choose Player:</label>
+                                <select id="playerListTwo" name="playerListTwo" onchange="">
+                                    <option value="NONE" selected>Select Player</option>
+                                </select> 
+                            </div>
+                        </div>
+                        <div class="col px-md-5">
+                            <div class="row">
+                                <button class="btn btn-primary mt-3" id="submitBtn" type="button" onclick="matchupPlayers()">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- //,Player,Tm,Pos,Age,G,GS,Cmp,Att,Yds,Int,Att,Yds,Tgt,Rec,Yds,Y/R,Fumbles,FumblesLost,PassingYds,PassingTD,PassingAtt,RushingYds,RushingTD,RushingAtt,ReceivingYds,ReceivingTD,FantasyPoints -->
+            <div class="container">
+                <div class="row border rounded my-3 py-3">
+                    <div class="col px-md-5">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="ageCheck">
+                            <label class="form-check-label" for="ageCheck">Age</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="gCheck">
+                            <label class="form-check-label" for="gCheck">Games</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="gsCheck">
+                            <label class="form-check-label" for="gsCheck">Games Started</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="cmpCheck">
+                            <label class="form-check-label" for="cmpCheck">Completions</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="recCheck">
+                            <label class="form-check-label" for="recCheck">Receptions</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="intCheck">
+                            <label class="form-check-label" for="intCheck">Interceptions</label>
+                        </div>
+                    </div>
+                    <div class="col px-md-5">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="tgtCheck">
+                            <label class="form-check-label" for="tgtCheck">Targets</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="ydrecCheck">
+                            <label class="form-check-label" for="ydrecCheck">Yards/Reception</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="fumCheck">
+                            <label class="form-check-label" for="fumCheck">Fumbles</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="fumlsCheck">
+                            <label class="form-check-label" for="fumlsCheck">Fumbles Lost</label>
+                        </div>
+                    </div>
+                    <div class="col px-md-5">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="pydsCheck">
+                            <label class="form-check-label" for="pydsCheck">Passing YDS</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="ptdsCheck">
+                            <label class="form-check-label" for="ptdsCheck">Passing TDs</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="pattCheck">
+                            <label class="form-check-label" for="pattCheck">Passing Att</label>
+                        </div>
+                    </div>
+                    <div class="col px-md-5">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="rydsCheck">
+                            <label class="form-check-label" for="rydsCheck">Rushing YDS</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="rtdsCheck">
+                            <label class="form-check-label" for="rtdsCheck">Rushing TDs</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="rattCheck">
+                            <label class="form-check-label" for="rattCheck">Rushing Att</label>
+                        </div>
+                    </div>
+                    <div class="col px-md-5">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="recydsCheck">
+                            <label class="form-check-label" for="recydsCheck">Receiving YDS</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="rectdsCheck">
+                            <label class="form-check-label" for="rectdsCheck">Receiving TDs</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="fpCheck">
+                            <label class="form-check-label" for="fpCheck">Fantasy Points</label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -151,6 +175,237 @@
                 </div>
             </div>
         </section>
+
+        <script>
+            // Upon year select, populate dropdown with players in that CSV
+            // Have one submit button. Call function to make sure two legit players are selected.
+            // If good, go into p1 file and get stats, update p1 array.
+            // If good, go into p2 file and get stats, update p2 array.
+            // Draw the chart.
+            // Else, output an alert to screen.
+            
+            //,Player,Tm,Pos,Age,G,GS,Cmp,Att,Yds,Int,Att,Yds,Tgt,Rec,Yds,Y/R,Fumbles,
+            // FumblesLost,PassingYds,PassingTD,PassingAtt,RushingYds,RushingTD,RushingAtt,ReceivingYds,ReceivingTD,FantasyPoints
+
+            //xmapping says what idx the stat is for the player row
+
+            const xlabels  =['Player',
+                              'Age', 
+                              'Games', 
+                              'Games Started', 
+                              'Completions', 
+                              'Receptions', 
+                              'Interceptions',
+                              'Targets', 
+                              'Y/R', 
+                              'Fumbles', 
+                              'Fumbles Lost', 
+                              'Pass. Yds', 
+                              'Pass. TDs', 
+                              'Pass. Att.',
+                              'Rush. Yds.', 
+                              'Rush. TDs', 
+                              'Rush. Att.', 
+                              'Rec. Yds.', 
+                              'Rec. TDs', 
+                              'Fantasy Points'
+                            ];
+
+            //,Player,Tm,Pos,Age,G,GS,Cmp,Att,Yds,Int,Att,Yds,Tgt,Rec,Yds,Y/R,Fumbles,
+            // FumblesLost,PassingYds,PassingTD,PassingAtt,RushingYds,RushingTD,RushingAtt,ReceivingYds,ReceivingTD,FantasyPoints
+            const xmap     = [1,4,5,6,7,14,10,13,16,17,18,19,20,21,22,23,24,25,26,27];
+            var leftFileData  = [];
+            var rightFileData = [];
+
+            var switchVals = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+
+            // Called when button clicked
+            function setSwitchVals(){
+                switchVals[0] = $("#ageCheck").is(":checked");
+                switchVals[1] = $("#gCheck").is(":checked");
+                switchVals[2] = $("#gsCheck").is(":checked");
+                switchVals[3] = $("#cmpCheck").is(":checked");
+                switchVals[4] = $("#recCheck").is(":checked");
+                switchVals[5] = $("#intCheck").is(":checked");
+                switchVals[6] = $("#tgtCheck").is(":checked");
+                switchVals[7] = $("#ydrecCheck").is(":checked");
+                switchVals[8] = $("#fumCheck").is(":checked");
+                switchVals[9] = $("#fumlsCheck").is(":checked");
+                switchVals[10] = $("#pydsCheck").is(":checked");
+                switchVals[11] = $("#ptdsCheck").is(":checked");
+                switchVals[12] = $("#pattCheck").is(":checked");
+                switchVals[13] = $("#rydsCheck").is(":checked");
+                switchVals[14] = $("#rtdsCheck").is(":checked");
+                switchVals[15] = $("#rattCheck").is(":checked");
+                switchVals[16] = $("#recydsCheck").is(":checked");
+                switchVals[17] = $("#rectdsCheck").is(":checked");
+                switchVals[18] = $("#fpCheck").is(":checked");
+            }
+
+            function buildBarArray(player1, player2){
+                // X Labels starts at a +1 offset because 'Player' isnt a category
+                var cats = [];
+
+                for(let i=0; i<switchVals.length; i++){
+                    if(switchVals[i] == true){
+                        //xlabels[1] has the value at xmapping[1];
+                        cats.push([xlabels[i+1], parseInt(player1[xmap[i+1]]), parseInt(player2[xmap[i+1]])]);
+                        console.log([xlabels[i+1], parseInt(player1[xmap[i+1]]), parseInt(player2[xmap[i+1]])]);
+                    }
+                }
+
+                return cats;
+            }
+
+            function isPlayersSelected(){
+                var listOne = document.getElementById("playerListOne");
+                var listTwo = document.getElementById("playerListTwo");
+                if(listOne.value=="NONE" || listOne.value==null || listTwo.value=="NONE" || listTwo.value==null){
+                    return false;
+                }
+                return true;
+            }
+
+            // Read players from a file for the selected year in the year dropdowns
+            async function checkDropDownYear(l){
+                if(l.value == "NONE"){
+                    alert("ERROR: Need to select valid year.");
+                    return;
+                }
+                var fname = l.value;   
+                const ftext = await fetch(fname);
+                const ptext = await ftext.text();
+                const table = ptext.split('\n').slice(1);
+                
+                var playerListID;
+                if(l.name == "yearsListOne"){
+                    playerListID = "playerListOne";
+                    leftFileData = [];
+                } else {
+                    playerListID = "playerListTwo";
+                    rightFileData = [];
+                }
+                
+                var playerList = document.getElementById(playerListID);
+                playerList.options.length = 0;
+
+                table.forEach(row => {
+                    const cols = row.split(',');
+                    const player = cols[1];
+                    var opt = document.createElement('option');
+                    opt.value = player;
+                    opt.innerHTML = player;
+                    playerList.appendChild(opt);
+
+                    // Push player rows to javascript array (cleared for every year change)
+                    if(l.name == "yearsListOne"){
+                        leftFileData.push(cols);
+                    } else {
+                        rightFileData.push(cols);
+                    }
+                });
+            }
+
+            // Submit button function
+            function matchupPlayers(){
+                if(!isPlayersSelected()){
+                    alert("ERROR: Need two players selected to compare.");
+                } else { // create the chart whoop!
+                    // Use the stored file data for the selected year, get the player selected, and return the info
+                    document.getElementById("chartContainer").style.width  = "800px";
+                    document.getElementById("chartContainer").style.height = "400px";
+
+                    setSwitchVals();
+
+                    var playerOne = document.getElementById("playerListOne").value;
+                    var playerTwo = document.getElementById("playerListTwo").value;
+                    var playerOneIdx;
+                    var playerTwoIdx;
+
+                    for(let i=0; i<leftFileData.length; i++){
+                        if(leftFileData[i][1] == playerOne){
+                            playerOneIdx = i;
+                            break;
+                        }
+                    }
+
+                    for(let i=0; i<rightFileData.length; i++){
+                        if(rightFileData[i][1] == playerTwo){
+                            playerTwoIdx = i;
+                            break;
+                        }
+                    }
+
+                    // Make sure players are correctly recieved
+                    console.log(leftFileData[playerOneIdx]);
+                    console.log(rightFileData[playerTwoIdx]);
+                    document.getElementById("chartContainer").innerHTML = "";
+                    makeChart(leftFileData[playerOneIdx], rightFileData[playerTwoIdx]);
+                }
+                return;
+            }
+
+            function makeChart(player1, player2){
+
+                // 1,4,5,7,10,13,14,17,18
+                // Set the chart data
+                var categories = buildBarArray(player1, player2);
+                var data = anychart.data.set(categories);
+
+                // map the data
+                var playerData1 = data.mapAs({x: 0, value: 1, fill: 3, stroke: 5, label: 6});
+                var playerData2 = data.mapAs({x: 0, value: 2, fill: 4, stroke: 5, label: 6});
+
+                // create a chart
+                chart = anychart.column();
+
+                // enable title
+                var title = chart.title();
+                title.enabled(true);
+                title.text("Player Comparison");
+
+                // enable legend
+                var legend = chart.legend();
+                legend.enabled(true);
+
+                // create series and set the data
+                var series1 = chart.column(playerData1);
+                var series2 = chart.column(playerData2);
+
+                chart.barGroupsPadding(1);
+
+                // Set width bound
+                chart.width('100%');
+
+                // Rename the series to player names
+                chart.getSeriesAt(0).name(player1[1]);
+                chart.getSeriesAt(1).name(player2[1]);
+
+                // colors
+                series1.normal().fill("#fc4c02", 0.5);
+                series1.hovered().fill("#fc4c02", 0.1);
+                series1.selected().fill("#fc4c02", 0.5);
+
+                // Add labels to bars
+                chart.getSeriesAt(0).labels(true);
+                chart.getSeriesAt(1).labels(true);
+
+                chart.tooltip().format("{%seriesName}: {%value}")
+
+                // set the container id
+                chart.container("chartContainer");
+
+                // initiate drawing the chart
+                chart.draw();
+            }
+
+            // makeChart();
+
+            // Not used rn
+            // document.getElementById("submitBtn").onclick = function(){
+            //     makeChart(yearVal);
+            // }
+        </script>
 		
         <!-- Footer -->
         <%- include('partials/footer') %>

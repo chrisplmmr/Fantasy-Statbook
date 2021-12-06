@@ -34,7 +34,6 @@ router.get('/home', function (req, res) {
 });
 
 router.get('/players', function (req, res) {
-	
 	res.render('players',
 	{
 		path : 'partials/2019_Players'
@@ -42,18 +41,7 @@ router.get('/players', function (req, res) {
 });
 
 router.get('/matchup', function (req, res) {
-	var cmd = 'SELECT * FROM test_table;';
-
-	// callback
-	pool.query(cmd, (err, qres) => {
-		if (err) {
-			console.log(err.stack);
-		} else {
-			// console.log(qres.rows);
-			res.render('matchup', {playerData: qres.rows});
-		}
-	});
-	//res.render('matchup');
+	res.render('matchup');
 });
 
 router.get('/seasonal', function (req, res) {
@@ -82,6 +70,10 @@ router.get('/2019data', (_, res) => {
 	// });
 	//res.sendFile(__dirname + '/../data/yearly/2019.csv');
 	res.sendFile(__dirname + '\\2019.txt');
+});
+
+router.get('/2018data', (_, res) => {
+	res.sendFile(__dirname + '\\2018.txt');
 });
 
 module.exports = router;
