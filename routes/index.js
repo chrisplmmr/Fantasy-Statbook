@@ -44,8 +44,8 @@ router.get('/matchup', function (req, res) {
 	res.render('matchup');
 });
 
-router.get('/seasonal', function (req, res) {
-	res.render('seasonal');
+router.get('/adp', function (req, res) {
+	res.render('adp');
 });
 
 router.get('/partials/2019_Players', function (req, res) {
