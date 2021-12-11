@@ -4,7 +4,8 @@
   "description": "Fantasy Statbook Description",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js  --watch routes --watch middleware --watch app.js",
+    "start": "node app.js  --watch routes --watch middleware --watch app.js",
+    "start:dev": "nodemon app.js  --watch routes --watch middleware --watch app.js",
     "lint": "eslint \"{views,public,routes,middleware,email}/**/*.js\"",
     "prettier": "prettier \"**/*.{js,css}\"",
     "format": "npm run prettier -- --write",
