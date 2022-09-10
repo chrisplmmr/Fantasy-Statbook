@@ -23,7 +23,7 @@ and their fantasy football performance over time.
 ### Technologies
 - Front End: EJS
 - Back End: Node.JS
-- Visualization Tools: AnyChart (python library), Tableau, Plotly, JupyterNotebook
+- Visualization Tools: AnyChart (JS library), Tableau, Plotly, JupyterNotebook
 - Python for cleaning data
 
 ### Our Visualizations
