@@ -1,5 +1,5 @@
 # Fantasy Statbook
-URL: https://git.heroku.com/fantasy-statbook.git
+URL: https://fantasy-statbook.herokuapp.com/
 
 ### Developers 
 Christopher Plummer
