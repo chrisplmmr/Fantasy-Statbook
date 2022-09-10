@@ -33,6 +33,12 @@ and their fantasy football performance over time.
 - Player Matchup
 -- Select up to two players out of our entire database and compare anystates relative to those players accross different football seasons.
 
+- ADP Value
+-- For the previous season (2021), by position, compare players Average Draft Position vs. Actual Player rank during the season.
+
+- All time comparison
+-- By position, compare player fantasy points over all time, to see which players have consitently performed the best over the years.
+
 
 
 
